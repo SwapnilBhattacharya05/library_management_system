@@ -1,7 +1,13 @@
+import { auth } from "@/auth";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import React from "react";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({ children }: { children: React.ReactNode }) => {
+  // IF USER IS ALREADY LOGGED IN NO NEED TO SHOW THE SIGNIN PAGE
+  const session = await auth();
+  if (session) redirect("/");
+
   return (
     <main className="auth-container">
       {/* LEFT SIDE OF THE SCREEN */}
