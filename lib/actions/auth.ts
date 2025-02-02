@@ -9,6 +9,9 @@ import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
 import { hash } from "bcryptjs";
 import { signIn } from "@/auth";
+import { headers } from "next/headers";
+import ratelimit from "@/lib/ratelimit";
+import { redirect } from "next/navigation";
 
 // Pick => PICKS ONLY SOME OF THE TYPES THAT WILL BE THERE
 // IN THIS CASE IT SHOULD ONLY BE EMAIL AND PASSWORD SINCE sign-in
@@ -17,6 +20,14 @@ export const signInWithCredentials = async (
   params: Pick<AuthCredentials, "email" | "password">
 ) => {
   const { email, password } = params;
+
+  // GET THE CURRENT IP ADDRESS
+  const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
+
+  // LIMIT THE NUMBER OF REQUESTS PER IP
+  const { success } = await ratelimit.limit(ip);
+
+  if (!success) return redirect("/too-fast");
   try {
     const result = await signIn("credentials", {
       email,
@@ -36,6 +47,14 @@ export const signInWithCredentials = async (
 };
 export const signUp = async (params: AuthCredentials) => {
   const { fullName, email, password, universityId, universityCard } = params;
+
+  // GET THE CURRENT IP ADDRESS
+  const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
+
+  // LIMIT THE NUMBER OF REQUESTS PER IP
+  const { success } = await ratelimit.limit(ip);
+
+  if (!success) return redirect("/too-fast");
 
   // CHECK IF THE USER ALREADY EXISTS IN THE DATABASE
   const existingUser = await db
