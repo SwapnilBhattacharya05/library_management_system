@@ -12,6 +12,8 @@ import { signIn } from "@/auth";
 import { headers } from "next/headers";
 import ratelimit from "@/lib/ratelimit";
 import { redirect } from "next/navigation";
+import { workflowClient } from "../workflow";
+import config from "@/lib/config";
 
 // Pick => PICKS ONLY SOME OF THE TYPES THAT WILL BE THERE
 // IN THIS CASE IT SHOULD ONLY BE EMAIL AND PASSWORD SINCE sign-in
@@ -78,6 +80,16 @@ export const signUp = async (params: AuthCredentials) => {
       password: hashedPassword,
       universityId,
       universityCard,
+    });
+
+    // trigger THE WORKFLOW WHEN THE USER IS CREATED
+    await workflowClient.trigger({
+      // url POINTING TO THE ROUTE OF THE WORKFLOW
+      url: `${config.env.prodApiEndpoint}/api/workflow/onboarding`,
+      body: {
+        email, // email WE WANT TO SEND TO
+        fullName, // NAME OF THE USER
+      },
     });
 
     await signInWithCredentials({ email, password });
