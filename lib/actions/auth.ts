@@ -85,7 +85,7 @@ export const signUp = async (params: AuthCredentials) => {
     // trigger THE WORKFLOW WHEN THE USER IS CREATED
     await workflowClient.trigger({
       // url POINTING TO THE ROUTE OF THE WORKFLOW
-      url: `${config.env.prodApiEndpoint}/api/workflow/onboarding`,
+      url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
       body: {
         email, // email WE WANT TO SEND TO
         fullName, // NAME OF THE USER
