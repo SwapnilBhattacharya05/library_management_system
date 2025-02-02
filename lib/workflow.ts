@@ -32,7 +32,7 @@ export const sendEmail = async ({
       provider: resend({ token: resendToken }),
     },
     body: {
-      from: "Zeltrax <hello.library-management.shop>",
+      from: "Zeltrax <zeltraxcontact@library-management.shop>",
       to: [email],
       subject: subject,
       html: message,
