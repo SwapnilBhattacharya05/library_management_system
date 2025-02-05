@@ -36,13 +36,15 @@ const BookOverview = async ({
     .limit(1);
 
   // console.log(coverUrl);
-  //  IF USER DOESN'T EXIST THEN WE CAN'T BORROW
-  if (!user) return null;
+  // IF USER DOESN'T EXIST THEN WE CAN'T BORROW
+  // !THIS IS NOT REQUIRED SINCE IF WE CAN'T FETCH THE USER WE CAN'T FIGURE OUT THE BORROWING ELIGIBILITY
+  // if (!user) return null;
+  // ?HENCE HIDING THE BUTTON IS MORE APPROPRIATE THAN HIDING THE WHOLE THING
 
   const borrowingEligibility = {
     // BOOLEAN VARIABLE
     // CHECK STATUS OF THE VARIABLE
-    isEligible: availableCopies > 0 && user.status === "APPROVED",
+    isEligible: availableCopies > 0 && user?.status === "APPROVED",
     message:
       availableCopies <= 0
         ? "Book is not available"
@@ -82,11 +84,14 @@ const BookOverview = async ({
         {/* DESCRIPTION */}
         <p className="book-description">{description}</p>
 
-        <BorrowBook
-          bookId={id}
-          userId={userId}
-          borrowingEligibility={borrowingEligibility}
-        />
+        {/* IF USER EXISTS SHOW THE BORROWED BOOK */}
+        {user && (
+          <BorrowBook
+            bookId={id}
+            userId={userId}
+            borrowingEligibility={borrowingEligibility}
+          />
+        )}
       </div>
 
       <div className="relative flex flex-1 justify-center">
