@@ -15,6 +15,13 @@
       "when": 1738688214671,
       "tag": "0001_cheerful_slipstream",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1738746724263,
+      "tag": "0002_smart_midnight",
+      "breakpoints": true
     }
   ]
 }

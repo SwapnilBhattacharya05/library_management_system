@@ -48,6 +48,9 @@ export const metadata: Metadata = {
   title: "BookWise",
   description:
     "BookWise is a borrowing university library management solution.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
