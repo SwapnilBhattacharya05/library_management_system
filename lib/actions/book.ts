@@ -27,7 +27,8 @@ export const borrowBook = async (params: BorrowBookParams) => {
 
     // INSERT SOMETHING INTO THE DATABASE BUT INTO A COMPLETELY NEW TABLE CALLED borrowRecords
     // TABLE -> borrowRecords
-    const record = db.insert(borrowRecords).values({
+    // !await SINCE WE ARE CREATING A NEW RECORD IN THE DATABASE
+    const record = await db.insert(borrowRecords).values({
       userId,
       bookId,
       dueDate,
