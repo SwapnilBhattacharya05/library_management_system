@@ -8,6 +8,13 @@
       "when": 1738389220800,
       "tag": "0000_fancy_luminals",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1738688214671,
+      "tag": "0001_cheerful_slipstream",
+      "breakpoints": true
     }
   ]
 }

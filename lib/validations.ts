@@ -21,8 +21,8 @@ export const bookSchema = z.object({
   description: z.string().trim().min(10).max(1000),
   author: z.string().trim().min(2).max(100),
   genre: z.string().trim().min(2).max(50),
-  rating: z.number().min(1).max(5),
   // coerce = TAKE A STRING AND CONVERT IT INTO A NUMBER
+  rating: z.coerce.number().min(1).max(5),
   // positive = NO LESS THAN 0
   // lte = LOWER THAN OR EQUAL
   totalCopies: z.coerce.number().int().positive().lte(10000),
