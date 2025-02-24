@@ -36,7 +36,7 @@ _Requirements:_
 **Clone Repository**
 
 ```bash
-git https://github.com/SwapnilBhattacharya05/library_management_system.git
+git clone https://github.com/SwapnilBhattacharya05/library_management_system.git
 cd library_management_system
 ```
 
