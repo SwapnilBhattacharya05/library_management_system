@@ -1,4 +1,4 @@
-# 🎬 Library Management System
+# 📚 Library Management System
 
 Built with Next.js, TypeScript, PostgreSQL and TailwindCSS. Production-grade platform featuring a public-facing application. Offers features like book borrowing with reminders and receipts, automated workflows, optimized tech stack for real-world scalability.
 
